@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="main.css">
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">HOME</a></li>
+            <li><a href="about.html" class="nav-link">ABOUT</a></li>
+            <li><a href="work.html" class="nav-link">WORK</a></li>
+        </ul>
+
+        <button class="contact-btn" onclick="href='contact.html'">
+            CONTACT ME
+    </nav>
+
+    <header class="hero">
+        <h1>Contact Us</h1>
+        <p>We’d love to hear from you! Share your interest, ideas, or partnership proposal with us below.</p>
+    </header>
+
+    <section class="contact-form">
+        <form id="contactForm" enctype="multipart/form-data">
+            <h2>Person Details</h2>
+
+            <label for="name">Full Name:</label><br>
+            <input type="text" name="name" id="name" placeholder="Enter your full name" required><br><br>
+
+            <label for="email">Email Address:</label><br>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required><br><br>
+
+            <label for="number">Phone Number:</label><br>
+            <input type="tel" name="number" id="number" placeholder="Enter your phone number"><br><br>
+
+            <label for="photo">Upload Your Photo:</label><br>
+            <input type="file" name="photo" id="photo" accept="image/*"><br><br>
+
+            <label for="caption">Caption for Your Photo :</label><br>
+            <textarea name="caption" id="caption" rows="4" placeholder=" Express your interest"
+                required></textarea><br><br>
+
+            <label for="message">Additional Info@:</label><br>
+            <textarea name="message" id="message" rows="5" placeholder="...." required></textarea><br><br>
+
+            <button type="submit" class="btn">SUBMIT</button>
+        </form>
+
+        <!-- Section to show the result -->
+        <div id="displayData"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Real-Time Racing Intelligence. All rights reserved.</p>
+        <p>Designed by: <strong>TUYISENGE ELIE</strong> | Devpost Hackathon 2025</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const displayData = document.getElementById('displayData');
+        const photoInput = document.getElementById('photo');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent page refresh
+
+            // Get all form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const number = document.getElementById('number').value;
+            const caption = document.getElementById('caption').value;
+            const message = document.getElementById('message').value;
+
+            // Handle image preview
+            const photo = photoInput.files[0];
+            let photoURL = '';
+            if (photo) {
+                photoURL = URL.createObjectURL(photo);
+            }
+
+            // Display data
+            displayData.innerHTML = `
+                <h3> Information ReCEIVED:</h3>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${number || 'Not provided'}</p>
+                ${photo ? `<p><strong>Photo:</strong><br><img src="${photoURL}" alt="Uploaded Photo"></p>` : ''}
+                <p><strong>Caption:</strong> ${caption}</p>
+                <p><strong>Message:</strong> ${message}</p>
+            `;
+
+            displayData.style.display = 'block';
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>
